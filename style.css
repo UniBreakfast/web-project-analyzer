@@ -1,0 +1,58 @@
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+#wrapper {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: min(1000px, 90%);
+  margin: 0 auto;
+}
+
+#wrapper>* {
+  flex-grow: 10;
+}
+
+#wrapper>header {
+  width: 100%;
+}
+
+#explorer {
+  text-align: left;
+}
+
+#explorer details>ul {
+  margin-top: -5px;
+  border-left: 1px solid;
+  padding-left: 10px;
+  border-radius: 0 0 0 6px;
+  padding-top: 6px;
+  margin-left: 5px;
+}
+
+#explorer li:not(.foldable) {
+  padding-left: 15px;
+}
+
+#stats {
+  max-width: 280px;
+  margin: auto;
+  flex-grow: 1;
+}
+
+#statList>li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#statList stat {
+  text-align: left;
+  font-weight: bold;
+}
+
+#files {
+  width: 100%;
+}

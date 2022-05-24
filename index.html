@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <!-- <script src="app.js" type="module"></script> -->
+
+  <title>Web Project Analyzer</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <h1>Web Project Analyzer</h1>
+    </header>
+
+    <section id="explorer">
+      <h2>Project structure</h2>
+
+      <h3>project-folder-name</h3>
+      <ul>
+        <li class="foldable">
+          <details>
+            <summary>public</summary>
+
+            <ul>
+              <li class="foldable">
+                <details>
+                  <summary>CSS</summary>
+
+                  <ul>
+                    <li>fonts.css</li>
+                    <li>reset.css</li>
+                    <li>style.css</li>
+                  </ul>
+                </details>
+              </li>
+              <li>index.html</li>
+              <li>script.js</li>
+            </ul>
+          </details>
+        </li>
+        <li>index.js</li>
+        <li>package.json</li>
+        <li>README.md</li>
+      </ul>
+    </section>
+
+    <section id="stats">
+      <h2>Stats</h2>
+
+      <ul id="statList">
+        <li>
+          <stat>Lines of code:</stat>
+          <value>2345</value>
+        </li>
+
+        <li>
+          <stat>Empty lines:</stat>
+          <value>100</value>
+        </li>
+
+        <li>
+          <stat>Lines with actual code:</stat>
+          <value>2245</value>
+        </li>
+
+        <hr>
+
+        <li>
+          <stat>Characters of code:</stat>
+          <value>40,000</value>
+        </li>
+
+        <hr>
+
+        <li>
+          <stat>Files total:</stat>
+          <value>15</value>
+        </li>
+
+        <li>
+          <stat>HTML files:</stat>
+          <value>2</value>
+        </li>
+
+        <li>
+          <stat>CSS files:</stat>
+          <value>2</value>
+        </li>
+
+        <li>
+          <stat>JS files:</stat>
+          <value>10</value>
+        </li>
+
+        <li>
+          <stat>Other files:</stat>
+          <value>1</value>
+        </li>
+
+        <hr>
+
+        <li>
+          <stat>Folders total:</stat>
+          <value>5</value>
+        </li>
+
+        <li>
+          <stat>Max depth:</stat>
+          <value>3</value>
+        </li>
+
+      </ul>
+    </section>
+
+    <section id="files">
+
+    </section>
+  </div>
+</body>
+
+</html>
