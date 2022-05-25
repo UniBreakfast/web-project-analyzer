@@ -40,6 +40,10 @@ ul {
   margin: -5px 0 -1px 5px;
 }
 
+#explorer summary {
+  padding-bottom: 1px;
+}
+
 #explorer .folder {
   --depth: 1;
   border: 1px solid;
@@ -99,16 +103,40 @@ ul {
   padding-bottom: 2px;
 }
 
+#explorer :checked+span {
+  font-weight: bold;
+  text-shadow: 0 0 1px black;
+}
+
 #stats {
   max-width: 280px;
   margin: auto;
   flex-grow: 1;
 }
 
+#statList {
+  position: relative;
+}
+
+#statList::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 9px 7px white;
+}
+
 #statList>li {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  background: linear-gradient(transparent,pink, transparent);
+  padding: 8px 15px;
+  margin: -14px 0;
+}
+
+#statList>li:nth-child(odd) {
+  background: linear-gradient(transparent, mistyrose, transparent);
+
 }
 
 #statList stat {
@@ -118,4 +146,14 @@ ul {
 
 #files {
   width: 100%;
+}
+
+#files table {
+  min-width: 100%;
+}
+
+#files .filename {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

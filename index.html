@@ -20,8 +20,8 @@
 
     <section id="explorer">
       <h2>Project structure</h2>
+      <h3 id="projectFolderName">project-folder-name</h3>
 
-      <h3>project-folder-name</h3>
       <ul>
         <li class="folder">
           <details>
@@ -30,7 +30,10 @@
             <ul>
               <li class="folder">
                 <details>
-                  <summary>CSS</summary>
+                  <summary>
+                    <input type="checkbox" checked hidden>
+                    <span>CSS</span>
+                  </summary>
 
                   <ul>
                     <li>fonts.css</li>
@@ -53,6 +56,17 @@
                               </ul>
                             </details>
                           </li>
+                          <li class="folder">
+                            <details>
+                              <summary>CSS</summary>
+
+                              <ul>
+                                <li>fonts.css</li>
+                                <li>reset.css</li>
+                                <li>style.css</li>
+                              </ul>
+                            </details>
+                          </li>
                           <li>index.html</li>
                           <li>script.js</li>
                         </ul>
@@ -63,11 +77,21 @@
                 </details>
               </li>
               <li>index.html</li>
-              <li>script.js</li>
+              <li>
+                <label>
+                  <input type="checkbox" checked hidden>
+                  <span>script.js</span>
+                </label>
+              </li>
             </ul>
           </details>
         </li>
-        <li>index.js</li>
+        <li>
+          <label>
+            <input type="checkbox" checked hidden>
+            <span>index.js</span>
+          </label>
+        </li>
         <li>package.json</li>
         <li>README.md</li>
       </ul>
@@ -75,6 +99,7 @@
 
     <section id="stats">
       <h2>Stats</h2>
+      <h3 id="selectedFilesList">index.js, CSS, script.js</h3>
 
       <ul id="statList">
         <li>
@@ -92,14 +117,19 @@
           <value>2245</value>
         </li>
 
-        <hr>
+        <hr><hr>
 
         <li>
           <stat>Characters of code:</stat>
           <value>40,000</value>
         </li>
 
-        <hr>
+        <li>
+          <stat>File size:</stat>
+          <value>40,000 Bytes</value>
+        </li>
+
+        <hr><hr>
 
         <li>
           <stat>Files total:</stat>
@@ -126,7 +156,7 @@
           <value>1</value>
         </li>
 
-        <hr>
+        <hr><hr>
 
         <li>
           <stat>Folders total:</stat>
@@ -142,7 +172,41 @@
     </section>
 
     <section id="files">
+      <h2>Files</h2>
 
+      <table>
+        <thead>
+          <tr>
+            <th>type</th>
+            <th>filename</th>
+            <th>size</th>
+            <th>lines</th>
+            <th>imports</th>
+            <th>importers</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>JS</td>
+            <td class="filename"><span>index</span><span>.js</span></td>
+            <td>7.14kB</td>
+            <td>140</td>
+            <td>5</td>
+            <td>-</td>
+          </tr>
+
+          <tr>
+            <td>JSON</td>
+            <td class="filename"><span>package</span><span>.json</span></td>
+            <td>3.41kB</td>
+            <td>80</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+
+        </tbody>
+      </table>
     </section>
   </div>
 </body>
