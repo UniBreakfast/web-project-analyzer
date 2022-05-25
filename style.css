@@ -19,21 +19,84 @@ ul {
   width: 100%;
 }
 
-#explorer {
+#explorer ul {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+#explorer>ul {
   text-align: left;
+  background: #bff;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 0 15px 15px #bff;
 }
 
 #explorer details>ul {
-  margin-top: -5px;
   border-left: 1px solid;
-  padding-left: 10px;
-  border-radius: 0 0 0 6px;
-  padding-top: 6px;
-  margin-left: 5px;
+  border-radius: 0 0 0 11px;
+  padding: 6px 0 0 10px;
+  margin: -5px 0 -1px 5px;
 }
 
-#explorer li:not(.foldable) {
+#explorer .folder {
+  --depth: 1;
+  border: 1px solid;
+  padding: 1px 6px 0 0;
+  margin-bottom: 3px;
+  position: relative;
+  border-radius: 10px 40px 10px 10px;
+  box-shadow: 2px 2px 3px 1px #4447;
+}
+
+#explorer .folder::after {
+  backdrop-filter: hue-rotate(calc(-14deg * var(--depth)));
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 40px 10px 10px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#explorer .folder .folder {
+  --depth: 2;
+}
+
+#explorer .folder .folder .folder {
+  --depth: 3;
+}
+
+#explorer .folder .folder .folder .folder {
+  --depth: 4;
+}
+
+#explorer .folder .folder .folder .folder .folder {
+  --depth: 5;
+}
+
+#explorer .folder .folder .folder .folder .folder .folder {
+  --depth: 6;
+}
+
+#explorer .folder .folder .folder .folder .folder .folder .folder {
+  --depth: 7;
+}
+
+#explorer .folder .folder .folder .folder .folder .folder .folder .folder {
+  --depth: 8;
+}
+
+#explorer .folder li:last-child {
+  margin-bottom: 7px;
+}
+
+#explorer li:not(.folder) {
   padding-left: 15px;
+  padding-bottom: 2px;
 }
 
 #stats {
