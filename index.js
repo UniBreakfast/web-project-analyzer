@@ -1,13 +1,88 @@
-const fsp = require('fs').promises
-const readline = require('readline')
+const fs = require('fs')
+const fsp = fs.promises
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
+const { createServer } = require('http')
 
-main()
+const mimeTypes = {
+  js: 'text/javascript; charset=utf-8',
+  css: 'text/css; charset=utf-8',
+  svg: 'image/svg+xml; charset=utf-8',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  gif: 'image/gif',
+  ico: 'image/x-icon',
+  mp3: 'audio/mpeg',
+  html: 'text/html; charset=utf-8',
+  json: 'application/json; charset=utf-8',
+  jpeg: 'image/jpeg',
+  woff: 'application/font-woff',
+  woff2: 'application/font-woff2',
+}
 
+const port = process.env.PORT || 3000
+const server = createServer(handleRequest)
+
+const apiHandlers = {neighborFoldersGET, scoutPOST}
+
+server.listen(port, tellAboutStart)
+
+async function handleApi(request) {
+  const { url } = request
+  const endpoint = url.slice(5) + request.method
+
+  const answer = await apiHandlers[endpoint](request)
+
+  return typeof answer === 'object' ? JSON.stringify(answer) : answer
+}
+
+async function neighborFoldersGET() {
+  const folderNames = await getNeighborFoldersNames()
+
+  return folderNames
+}
+
+async function scoutPOST(request) {
+  const body = await getBody(request)
+  const { folderName } = JSON.parse(body)
+
+  return await scout('../' + folderName)
+}
+
+async function getBody(stream) {
+  const chunks = []
+
+  for await (const chunk of stream) chunks.push(chunk)
+
+  return Buffer.concat(chunks).toString()
+}
+
+async function handleRequest(request, response) {
+  let { url } = request
+
+  if (url.startsWith('/api/')) {
+    return response.end(await handleApi(request))
+  }
+
+  if (url === '/') url = '/index.html'
+
+  try {
+    const file = await fsp.readFile('public' + url)
+    const ext = url.match(/\.([^.]+)$/)[1]
+    const mime = mimeTypes[ext]
+
+    response.setHeader('Content-Type', mime)
+    response.end(file)
+
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      response.statusCode = 404
+      response.end(`Not found: ${url}`)
+    } else {
+      response.statusCode = 500
+      response.end('Internal server error')
+    }
+  }
+}
 
 async function recon(path, depth = 32) {
   const stats = await fsp.stat(path)
@@ -49,32 +124,6 @@ async function getNeighborFoldersNames() {
   return folderNames
 }
 
-async function getFolderStructure(folderNames) {
-  console.log(folderNames.join('\n'))
-
-  return new Promise(resolve => {
-    rl.question('\nFolder name: ', async folderName => {
-      if (!folderNames.includes(folderName)) {
-        console.log('\nFolder name not found\n')
-        return resolve()
-      }
-
-      const folderInfo = await scout('../' + folderName)
-
-      console.log(JSON.stringify(folderInfo, null, 2).replaceAll('"', ''))
-
-      rl.question('\nPress enter to continue...\n', () => resolve())
-    })
-  })
+function tellAboutStart() {
+  console.log(`Server started at http://localhost:${port}`)
 }
-
-async function main() {
-  const folderNames = await getNeighborFoldersNames()
-
-  while (true) await getFolderStructure(folderNames)
-}
-
-
-setTimeout(() => {
-
-}, 1e6);

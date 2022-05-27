@@ -42,7 +42,7 @@ ul {
 }
 
 #explorer summary {
-  padding-bottom: 1px;
+  padding: 0 14px 1px 0;
 }
 
 #explorer .folder {
