@@ -1,27 +1,13 @@
 const fsp = require('fs').promises
+const readline = require('readline')
 
-async function explore(path, depth = 32) {
-  const stats = await fsp.stat(path)
-  const dir = stats.isDirectory()
-  const name = path.match(/[^/\\]*$/)[0]
-  const report = { name }
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
 
-  if (!dir) {
-    report.size = stats.size
+main()
 
-  } else if (depth) {
-    const list = await fsp.readdir(path)
-
-    report.subs = await Promise.all(list.map(
-      name => explore(path + '/' + name, depth - 1)
-    ))
-
-  } else {
-    report.subs = '...'
-  }
-
-  return report
-}
 
 async function recon(path, depth = 32) {
   const stats = await fsp.stat(path)
@@ -53,7 +39,41 @@ async function scout(path, depth = 32) {
   return { [name]: report }
 }
 
-scout('..').then(console.log)
+async function getNeighborFoldersNames() {
+  const parentFolderInfo = await recon('..', 1)
+  const folderNames = []
+
+  for (const [name, value] of Object.entries(parentFolderInfo))
+    if (typeof value !== 'number') folderNames.push(name)
+
+  return folderNames
+}
+
+async function getFolderStructure(folderNames) {
+  console.log(folderNames.join('\n'))
+
+  return new Promise(resolve => {
+    rl.question('\nFolder name: ', async folderName => {
+      if (!folderNames.includes(folderName)) {
+        console.log('\nFolder name not found\n')
+        return resolve()
+      }
+
+      const folderInfo = await scout('../' + folderName)
+
+      console.log(JSON.stringify(folderInfo, null, 2).replaceAll('"', ''))
+
+      rl.question('\nPress enter to continue...\n', () => resolve())
+    })
+  })
+}
+
+async function main() {
+  const folderNames = await getNeighborFoldersNames()
+
+  while (true) await getFolderStructure(folderNames)
+}
+
 
 setTimeout(() => {
 
