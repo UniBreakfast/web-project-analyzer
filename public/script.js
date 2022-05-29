@@ -3,7 +3,6 @@ const structureList = document.getElementById('structureList')
 
 getFolderStructure('prove-google-sheets-as-db').then(buildTree)
 
-
 async function getNeighborFoldersNames() {
   const response = await fetch('/api/neighborFolders')
   return response.json()

@@ -19,8 +19,16 @@
     </header>
 
     <section id="explorer">
-      <h2>Project structure</h2>
-      <h3 id="projectFolderName">project-folder-name</h3>
+      <header>
+        <h2>Project structure</h2>
+
+        <h3 id="projectFolderName">project-folder-name</h3>
+        <button>
+          <label for="itemsToHideModalRadio">
+            <img src="hidden.png" alt="show or hide">
+          </label>
+        </button>
+      </header>
 
       <ul id="structureList">
         <li class="folder">
@@ -117,7 +125,8 @@
           <value>2245</value>
         </li>
 
-        <hr><hr>
+        <hr>
+        <hr>
 
         <li>
           <stat>Characters of code:</stat>
@@ -129,7 +138,8 @@
           <value>40,000 Bytes</value>
         </li>
 
-        <hr><hr>
+        <hr>
+        <hr>
 
         <li>
           <stat>Files total:</stat>
@@ -156,7 +166,8 @@
           <value>1</value>
         </li>
 
-        <hr><hr>
+        <hr>
+        <hr>
 
         <li>
           <stat>Folders total:</stat>
@@ -209,6 +220,26 @@
       </table>
     </section>
   </div>
+
+  <input type="radio" name="modal" value="itemsToHide" id="itemsToHideModalRadio" hidden>
+
+  <glass hidden>
+    <label> <input type="radio" name="modal" hidden> </label>
+
+    <modal id="itemsToHideModal" hidden>
+      <h2>Hide folders / files</h2>
+
+      <form id="itemsToHideForm">
+        <label>
+          <input type="checkbox" name="hide" value=".git"> .git
+        </label>
+
+        <label>
+          <input type="checkbox" name="hide" value="node_modules"> node_modules
+        </label>
+      </form>
+    </modal>
+  </glass>
 </body>
 
 </html>
